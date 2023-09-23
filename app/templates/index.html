@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>YouTube Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+            table-layout: fixed;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="/" method="post">
+        <input type="text" name="video_url" placeholder="Enter YouTube URL" required>
+        <input type="submit" value="Analyze">
+    </form>
+
+    {% if summary %}
+    <h2>Summary</h2>
+    <p>Positive: {{ summary['positive'] }}</p>
+    <p>Negative: {{ summary['negative'] }}</p>
+    <p>Number of Comments: {{ summary['num_comments'] }}</p>
+    <p>Rating: {{ summary['rating'] }}%</p>
+
+    <h3>Comments</h3>
+    <table>
+        <tr>
+            <th>Comment</th>
+            <th>Sentiment</th>
+        </tr>
+        {% for comment, sentiment in comments %}
+        <tr>
+            <td>{{ comment }}</td>
+            <td>{{ sentiment }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+</body>
+
+</html>
